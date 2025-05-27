@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="TurtleGraphics" default="default" basedir=".">
+    <description>Builds, tests, and runs the project TurtleGraphics.</description>
+    <import file="nbproject/build-impl.xml"/>
+
+    <property name="src.dir" value="src"/>
+    <property name="build.dir" value="build"/>
+    <property name="build.classes.dir" value="${build.dir}/classes"/> 
+    <property name="antlr4.tool.jar" value="D:/antlr-4.13.2-complete.jar"/>
+    <property name="antlr4.grammar.dir" value="${src.dir}/antlrturtle"/>
+    <property name="antlr4.generated.dir" value="${build.dir}/generated-sources/antlr4"/>
+
+    <target name="antlr4-generate" description="Generate ANTLR4 parser and lexer">
+        <mkdir dir="${antlr4.generated.dir}"/>
+        <echo message="Generating ANTLR4 sources from ${antlr4.grammar.dir}/Logo.g4 to ${antlr4.generated.dir}"/>
+        <java jar="${antlr4.tool.jar}" fork="true" failonerror="true">
+            <arg value="-o"/>
+            <arg value="${antlr4.generated.dir}"/>
+            <arg value="-package"/>
+            <arg value="antlrturtle"/> 
+            <arg value="${antlr4.grammar.dir}/Logo.g4"/>
+        </java>
+        <echo message="ANTLR4 code generated successfully."/>
+    </target>
+
+    <target name="-pre-compile" depends="antlr4-generate">
+        <echo message="Running pre-compile tasks: ANTLR4 generation complete."/>
+    </target>
+
+    <target name="-do-compile" depends="-pre-compile, -init-macrodef-javac">
+        <mkdir dir="${build.classes.dir}"/>
+        <javac srcdir="${src.dir}:${antlr4.generated.dir}"
+               destdir="${build.classes.dir}"
+               classpath="${javac.classpath}"
+               bootclasspath="${platform.bootclasspath}"
+               debug="${javac.debug}"
+               deprecation="${javac.deprecation}"
+               encoding="${source.encoding}"
+               fork="${javac.fork}"
+               includeantruntime="false"
+               optimize="${javac.optimize}"
+               source="${javac.source}"
+               target="${javac.target}"
+               excludes="${excludes}"/>
+<!--
+        <copy todir="${build.classes.dir}">
+            <fileset dir="${src.dir}" excludes="${excludes},**/*.java"/>
+        </copy>-->
+
+        <echo message="Copying resources from ${src.dir}/main/resources to ${build.classes.dir}"/>
+        <copy todir="${build.classes.dir}">
+            <fileset dir="${src.dir}/main/resources"/>
+        </copy>
+        <echo message="Resources copied."/>
+    </target>
+
+</project>
