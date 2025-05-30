@@ -1,0 +1,12 @@
+// Draw a square
+clearscreen
+set 50,50
+penDown
+forward 100
+right 90
+forward 100
+right 90
+forward 100
+right 90
+forward 100
+right 90

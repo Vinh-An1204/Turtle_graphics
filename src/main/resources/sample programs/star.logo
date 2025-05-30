@@ -1,0 +1,14 @@
+// Draw a five-pointed star
+clearscreen
+set 100,150
+penDown
+forward 100
+right 144
+forward 100
+right 144
+forward 100
+right 144
+forward 100
+right 144
+forward 100
+right 144

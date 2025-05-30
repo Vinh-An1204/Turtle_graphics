@@ -1,0 +1,24 @@
+// Draw a simple spiral
+clearscreen
+set 50,50
+penDown
+forward 10
+right 15
+forward 20
+right 15
+forward 30
+right 15
+forward 40
+right 15
+forward 50
+right 15
+forward 60
+right 15
+forward 70
+right 15
+forward 80
+right 15
+forward 90
+right 15
+forward 100
+right 15
